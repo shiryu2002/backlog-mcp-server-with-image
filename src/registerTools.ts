@@ -38,6 +38,19 @@ export function registerTools(
         maxTokens,
       }),
   });
+
+  // Register dynamic tools attached to the toolset group (e.g., image attachment tools)
+  if (toolsetGroup.dynamicTools && toolsetGroup.dynamicTools.length > 0) {
+    for (const tool of toolsetGroup.dynamicTools) {
+      const toolNameWithPrefix = `${prefix}${tool.name}`;
+      server.registerOnce(
+        toolNameWithPrefix,
+        tool.description,
+        tool.schema.shape,
+        tool.handler
+      );
+    }
+  }
 }
 
 export function registerDyamicTools(

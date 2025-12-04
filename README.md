@@ -205,6 +205,8 @@ Tools for managing issues, their comments, and related items like priorities, ca
 - `delete_issue`: Deletes an issue.
 - `get_issue_comments`: Returns list of comments for an issue.
 - `add_issue_comment`: Adds a comment to an issue.
+- `get_issue_attachments`: Returns list of attachments for an issue. Use this to find attachment IDs before downloading images.
+- `get_issue_attachment`: Downloads an issue attachment. If the attachment is an image, returns the image data directly so it can be analyzed by the AI agent.
 - `get_priorities`: Returns list of priorities.
 - `get_categories`: Returns list of categories for a project.
 - `get_custom_fields`: Returns list of custom fields for a project.
@@ -280,6 +282,10 @@ Create a new pull request from branch "feature/new-feature" to "main" in the rep
 - Watching Items
 ```
 Show me all items I'm watching 
+```
+- Getting Issue Attachments with Images
+```
+List all attachments for issue TEST-123 and analyze any images you find.
 ```
 
 ### i18n / Overriding Descriptions
