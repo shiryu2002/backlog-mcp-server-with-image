@@ -53,7 +53,7 @@ export function registerTools(
   }
 }
 
-export function registerDyamicTools(
+export function registerDynamicTools(
   server: BacklogMCPServer,
   dynamicToolsetGroup: DynamicToolsetGroup,
   prefix: string

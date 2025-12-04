@@ -3,7 +3,7 @@ import { Backlog, Entity } from 'backlog-js';
 import { buildToolSchema, DynamicToolDefinition } from '../types/tool.js';
 import { TranslationHelper } from '../createTranslationHelper.js';
 import { resolveIdOrKey } from '../utils/resolveIdOrKey.js';
-import { getImageMimeType, isImageFile } from '../utils/mimeType.js';
+import { getImageMimeType } from '../utils/mimeType.js';
 import { PassThrough } from 'stream';
 
 const getIssueAttachmentSchema = buildToolSchema((t) => ({
@@ -97,10 +97,10 @@ export const getIssueAttachmentTool = (
 
       const filename = fileData.filename;
 
-      // Check if the file is an image
-      if (isImageFile(filename)) {
-        const mimeType = getImageMimeType(filename);
+      // Get MIME type - if non-null, it's an image file
+      const mimeType = getImageMimeType(filename);
 
+      if (mimeType !== null) {
         // Convert stream to base64
         const buffer = await streamToBuffer(fileData.body);
         const base64Data = buffer.toString('base64');
@@ -114,7 +114,7 @@ export const getIssueAttachmentTool = (
             {
               type: 'image' as const,
               data: base64Data,
-              mimeType: mimeType!,
+              mimeType: mimeType,
             },
           ],
         };
