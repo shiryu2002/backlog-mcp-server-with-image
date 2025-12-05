@@ -49,6 +49,8 @@ import { getVersionMilestoneListTool } from './getVersionMilestoneList.js';
 import { addVersionMilestoneTool } from './addVersionMilestone.js';
 import { updateVersionMilestoneTool } from './updateVersionMilestone.js';
 import { deleteVersionTool } from './deleteVersion.js';
+import { getIssueAttachmentsTool } from './getIssueAttachments.js';
+import { getIssueAttachmentTool } from './getIssueAttachment.js';
 
 export const allTools = (
   backlog: Backlog,
@@ -93,6 +95,7 @@ export const allTools = (
           deleteIssueTool(backlog, helper),
           getIssueCommentsTool(backlog, helper),
           addIssueCommentTool(backlog, helper),
+          getIssueAttachmentsTool(backlog, helper),
           getPrioritiesTool(backlog, helper),
           getCategoriesTool(backlog, helper),
           getCustomFieldsTool(backlog, helper),
@@ -156,5 +159,7 @@ export const allTools = (
         ],
       },
     ],
+    // Dynamic tools that return image content directly (bypassing normal transformation)
+    dynamicTools: [getIssueAttachmentTool(backlog, helper)],
   };
 };
